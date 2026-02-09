@@ -30,54 +30,59 @@ html,body{
   background:url("horse.png") center/cover no-repeat;
   z-index:1;
 }
-
 .scroll-text{
     position: fixed;
-    top: 42%;                 /* canh giữa cuộn giấy */
+    top: 42%;
     left: 50%;
-    transform: translate(-50%, -50%);
+
+    /* canh giữa + nghiêng theo cuộn giấy */
+    transform:
+      translate(-50%, -50%)
+      rotate(-4deg)
+      skewX(-2deg);
 
     width: 56%;
     max-width: 360px;
 
-    padding: 10px 12px;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border-radius: 12px;
 
     text-align: center;
 
-    color: #FFD966;           /* vàng gold dễ đọc */
+    background: linear-gradient(
+      180deg,
+      rgba(255,226,150,.92),
+      rgba(255,193,7,.88)
+    );
+
+    color: #8b2c00;
     font-weight: 700;
 
-    text-shadow:
-        0 2px 6px rgba(0,0,0,.6),
-        0 0 12px rgba(255,215,0,.45);
+    box-shadow:
+      0 8px 28px rgba(0,0,0,.4),
+      inset 0 0 18px rgba(255,255,255,.35);
 
     z-index: 10;
 }
 
 /* ===== CHỮ NỘI DUNG ===== */
+.scroll-text .from,
 .scroll-text .wish{
-    font-size: 15px;
-    line-height: 1.6;
+    transform: rotate(1deg);
 }
 
-/* ===== DÒNG NGƯỜI GỬI ===== */
-.scroll-text .from{
-    font-size: 13px;
-    margin-bottom: 6px;
-    opacity: .9;
-}
 
 /* ===== MOBILE ===== */
 @media (max-width: 600px){
-    .scroll-text{
-        top: 44%;
-        width: 60%;
-    }
+  .scroll-text{
+    top: 44%;
+    width: 60%;
 
-    .scroll-text .wish{
-        font-size: 14px;
-    }
+    transform:
+      translate(-50%, -50%)
+      rotate(-3deg)
+      skewX(-1.5deg);
+  }
 }
 /* ===== FIREWORKS ===== */
 #fireworks{
@@ -222,4 +227,5 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
