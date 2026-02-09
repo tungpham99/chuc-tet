@@ -18,9 +18,9 @@ html,body{
   margin:0;
   padding:0;
   height:100%;
-  font-family:system-ui,-apple-system;
   overflow:hidden;
   background:#000;
+  font-family:system-ui,-apple-system;
 }
 
 /* ===== BACKGROUND NGỰA ===== */
@@ -30,58 +30,23 @@ html,body{
   background:url("horse.png") center/cover no-repeat;
   z-index:1;
 }
-.scroll-text{
- position: fixed;
-  top: 45%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-4deg);
-  width: 58%;
-  max-width: 320px;
-  aspect-ratio: 3 / 4; /* Tạo ô vuông/chữ nhật giống cuộn giấy */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 16px 18px;
-  box-sizing: border-box;
-  text-align: center;
-  color: gold;
-  font-weight: 700;
-  line-height: 1.35;
-  pointer-events: none;
+
+/* ===== SVG CUỘN GIẤY ===== */
+.scroll-svg{
+  position:fixed;
+  top:46%;
+  left:50%;
+  transform:translate(-50%,-50%) rotate(-4deg);
+
+  width:58vw;
+  max-width:320px;
+  aspect-ratio:3/4;
+
+  z-index:3;
+  pointer-events:none;
 }
 
-/* ===== CHỮ NỘI DUNG ===== */
-  .scroll-text .from{
-  font-size: 14px;
-  margin-bottom: 6px;
-  opacity: 0.95;
-}
-
-.scroll-text .wish{
-  font-size: 16px;
-  font-weight: 800;
-}
-
-
-/* ===== MOBILE ===== */
-@media (max-width: 600px){
-  .scroll-text{
-    top: 46%;
-    width: 62%;
-    max-width: 280px;
-    transform: translate(-50%, -50%) rotate(-3deg);
-  }
-
-  .scroll-text .from{
-    font-size: 13px;
-  }
-
-  .scroll-text .wish{
-    font-size: 15px;
-  }
-}
-/* ===== FIREWORKS ===== */
+/* ===== FIREWORK ===== */
 #fireworks{
   position:fixed;
   inset:0;
@@ -95,12 +60,47 @@ html,body{
 
 <div class="bg"></div>
 
-<div class="scroll-text">
-  <div class="from">
-    🎁 <b id="from"></b> gửi bạn lời chúc
-  </div>
-  <div class="wish" id="wish"></div>
-</div>
+<!-- ===== CHỮ CONG + ÁNH KIM ===== -->
+<svg class="scroll-svg" viewBox="0 0 300 400" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <!-- Đường cong theo cuộn giấy -->
+    <path id="curveTop" d="M30 130 Q150 105 270 130"/>
+    <path id="curveMid" d="M40 210 Q150 235 260 210"/>
+
+    <!-- Gradient vàng kim -->
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8c4"/>
+      <stop offset="25%" stop-color="#ffd700"/>
+      <stop offset="50%" stop-color="#ffec8b"/>
+      <stop offset="75%" stop-color="#ffb700"/>
+      <stop offset="100%" stop-color="#fff3a0"/>
+    </linearGradient>
+
+    <!-- Ánh kim chạy -->
+    <linearGradient id="shine" x1="-100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,.8)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+      <animate attributeName="x1" from="-100%" to="100%" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="x2" from="0%" to="200%" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dòng người gửi -->
+  <text font-size="14" font-weight="700" fill="url(#goldGradient)">
+    <textPath href="#curveTop" startOffset="50%" text-anchor="middle">
+      🎁 <tspan id="fromSvg"></tspan> gửi bạn lời chúc
+    </textPath>
+  </text>
+
+  <!-- Dòng lời chúc -->
+  <text font-size="16" font-weight="800" fill="url(#goldGradient)">
+    <textPath href="#curveMid" startOffset="50%" text-anchor="middle" id="wishSvg"></textPath>
+  </text>
+
+  <!-- Lớp ánh kim phủ -->
+  <rect x="0" y="0" width="100%" height="100%" fill="url(#shine)" opacity="0.35"/>
+</svg>
 
 <canvas id="fireworks"></canvas>
 
@@ -178,10 +178,10 @@ const params = new URLSearchParams(location.search);
 const from = params.get("from") || "Tùng Phạm";
 const wish = wishes[Math.floor(Math.random()*wishes.length)];
 
-document.getElementById("from").innerText = from;
-document.getElementById("wish").innerText = wish;
+document.getElementById("fromSvg").textContent = from;
+document.getElementById("wishSvg").textContent = wish;
 
-/* ===== FIREWORK EFFECT ===== */
+/* ===== FIREWORK ===== */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
@@ -192,11 +192,11 @@ function resize(){
 resize();
 addEventListener("resize", resize);
 
-let sparks = [];
+let sparks=[];
 
 setInterval(()=>{
-  const x = Math.random()*canvas.width;
-  const y = Math.random()*canvas.height*0.4;
+  const x=Math.random()*canvas.width;
+  const y=Math.random()*canvas.height*0.4;
   for(let i=0;i<30;i++){
     sparks.push({
       x,y,
@@ -210,7 +210,7 @@ setInterval(()=>{
 (function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let i=sparks.length-1;i>=0;i--){
-    const s = sparks[i];
+    const s=sparks[i];
     s.x+=s.dx;
     s.y+=s.dy;
     s.life--;
@@ -224,6 +224,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
