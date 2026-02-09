@@ -2,11 +2,12 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<meta property="og:title" content="🎉 Bạn có lời chúc năm mới 🎉">
+<meta property="og:title" content="🎉 Tùng đã gửi lời chúc năm mới tới bạn 🎉">
 <meta property="og:description" content="Nhấn để xem lời chúc năm mới">
-<meta property="og:type" content="website">
+<meta property="og:image" content="https://i.imgur.com/4M7IWwP.png">
+<meta property="og:url" content="https://tungpham99.github.io/chuc-tet/?from=Tùng Phạm">
 
 <title>Chúc Mừng Năm Mới</title>
 
@@ -259,12 +260,19 @@ function draw(){
 draw();
 
 /* ===== ACTION ===== */
-function reply(){open("https://m.me/","_blank");}
+function reply(){
+  // Mở Messenger trong WebView Facebook
+  location.href = "https://m.me/";
+}
+
 function share(){
-  open("https://www.facebook.com/sharer/sharer.php?u="+
-  encodeURIComponent(location.href),"_blank");
+  // Share vẫn mở trong Facebook app
+  location.href =
+    "https://www.facebook.com/sharer/sharer.php?u=" +
+    encodeURIComponent(location.href);
 }
 </script>
 
 </body>
 </html>
+
