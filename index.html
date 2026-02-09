@@ -100,26 +100,33 @@ html,body{
 
 /* ===== BUTTON ===== */
 .footer-actions{
-  position:absolute;
-  bottom:18px;
-  left:50%;
-  transform:translateX(-50%);
-  display:flex;
-  gap:12px;
-  pointer-events:auto;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    text-align: center;
+    height: 60px;
+    width: 55%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 16px;
+    z-index: 5;
 }
+
 .footer-actions button{
-  padding:10px 18px;
-  border-radius:999px;
-  border:none;
-  font-size:14px;
-  font-weight:600;
-  cursor:pointer;
-  background: linear-gradient(135deg,#ffd700,#ffb700);
-  color:#7a2e00;
-  box-shadow:0 6px 14px rgba(0,0,0,.35);
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    background: linear-gradient(135deg,#ffd700,#ffb700);
+    color: #7a2e00;
+    box-shadow: 0 6px 14px rgba(0,0,0,.35);
 }
-.footer-actions button:active{transform:scale(.95)}
+
+.footer-actions button:active{
+  transform: scale(0.95);
+}
 
 /* ===== HOA RỤNG ===== */
 .petals{
@@ -143,10 +150,11 @@ html,body{
 /* ===== MOBILE ===== */
 @media (max-width:600px){
   .scroll-text{
-    top:48%;
-    width:58%;
-    max-width:260px;
-    transform:translate(-50%,-50%) rotate(-5deg);
+      top: 40%;
+      width: 85%;
+      line-height: 2.5;
+      max-width: 270px;
+      transform: translate(-40%, -55%) rotate(-7deg);
   }
   .scroll-text .from{font-size:13px}
   .scroll-text .wish{font-size:14px}
@@ -256,3 +264,4 @@ setInterval(()=>{
 
 </body>
 </html>
+
