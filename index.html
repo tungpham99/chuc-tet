@@ -6,14 +6,10 @@
 
 <!-- Open Graph -->
 <meta property="og:title" content="🎉 Tùng Phạm đã gửi lời chúc năm mới tới bạn 🎉">
-<meta property="og:description"
-      content="🧧 Nhấn vào ảnh để xem lời chúc năm mới từ Tùng Phạm 🎆">
+<meta property="og:description" content="Nhấn ngay để nhận lời chúc năm mới 🧧">
 <meta property="og:image" content="https://tungpham99.github.io/chuc-tet/anhchuctet.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/png">
-<meta property="og:image:alt" content="Ảnh chúc Tết 3D – Tùng Phạm gửi lời chúc năm mới">
 <meta property="og:url" content="https://tungpham99.github.io/chuc-tet/">
+<meta property="og:type" content="website">
 
 <title>Chúc Mừng Năm Mới</title>
 
@@ -22,135 +18,76 @@ html,body{
   margin:0;
   padding:0;
   height:100%;
-  overflow:hidden;
   font-family:system-ui;
-  background:linear-gradient(135deg,#b30000,#ffcc33);
+  overflow:hidden;
 }
 
-/* Fireworks */
-#fireworks{
+/* Background ngựa */
+.bg{
   position:fixed;
   inset:0;
+  background:url("horse.png") center/cover no-repeat;
   z-index:1;
 }
 
-/* BACKGROUND NGỰA CẦM GIẤY */
-.bg-paper{
-position:fixed;
-  inset:0;
-  background:url("https://tungpham99.github.io/chuc-tet/horse-paper.png")
-             center bottom / contain no-repeat;
-  z-index:0;
+/* Khung lời chúc */
+.scroll-text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:75%;
+  max-width:420px;
+  text-align:center;
+  z-index:3;
+  color:#7a0000;
 }
 
-/* CANVAS VẼ LỜI CHÚC */
-#wishCanvas{
+.scroll-text .from{
+  font-size:14px;
+  opacity:.85;
+  margin-bottom:10px;
+}
+
+.scroll-text .wish{
+  font-size:18px;
+  line-height:1.6;
+  font-weight:600;
+}
+
+/* Mobile */
+@media(max-width:600px){
+  .scroll-text{
+    width:85%;
+    top:52%;
+  }
+  .scroll-text .wish{
+    font-size:16px;
+  }
+}
+
+/* Pháo hoa */
+#fireworks{
   position:fixed;
   inset:0;
   z-index:2;
   pointer-events:none;
-}
-
-/* Hoa mai */
-.mai{
-  position:fixed;
-  top:-50px;
-  font-size:24px;
-  animation:fall linear infinite;
-  z-index:2;
-}
-@keyframes fall{
-  to{transform:translateY(110vh) rotate(360deg);}
-}
-
-/* Card */
-.card{
-  position:relative;
-  z-index:3;
-  background:rgba(0,0,0,.35);
-  padding:26px 22px;
-  border-radius:18px;
-  max-width:420px;
-  width:90%;
-  margin:auto;
-  top:50%;
-  transform:translateY(-50%);
-  text-align:center;
-  color:#fff;
-}
-
-#wish{
-  font-size:18px;
-  line-height:1.6;
-  margin:18px 0 22px;
-}
-
-button{
-  width:100%;
-  padding:14px;
-  border:none;
-  border-radius:999px;
-  font-size:16px;
-  font-weight:bold;
-  margin-bottom:10px;
-}
-
-.reply{background:#00c853;color:#fff;}
-.share{background:#ffd600;color:#8d2b00;}
-
-.counter{
-  font-size:13px;
-  opacity:.85;
-  margin-top:6px;
-}
-
-/* Toast Facebook */
-.toast{
-  position:fixed;
-  top:15px;
-  left:50%;
-  transform:translateX(-50%);
-  background:#1877f2;
-  color:#fff;
-  padding:12px 18px;
-  border-radius:999px;
-  font-size:14px;
-  z-index:4;
-  animation:pop 3s ease forwards;
-}
-@keyframes pop{
-  0%{opacity:0;transform:translate(-50%,-10px);}
-  10%,90%{opacity:1;}
-  100%{opacity:0;}
-}
-@media (max-width: 768px){
-  .bg-paper{
-    background-position: center bottom;
-    background-size: 100% auto;
-  }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="fireworks"></canvas>
+<div class="bg"></div>
 
-<div class="card">
-  <h2>🧧 Chúc Mừng Năm Mới 🧧</h2>
-<div class="bg-paper"></div>
-<canvas id="wishCanvas"></canvas>
-  <button class="reply" onclick="reply()">💬 Phản hồi</button>
-  <button class="share" onclick="share()">📤 Chia sẻ</button>
-
-  <div class="counter">
-    👀 Lượt mở: <span id="count">0</span>
+<div class="scroll-text">
+  <div class="from">
+    🎁 <b id="from"></b> gửi bạn lời chúc
   </div>
+  <div class="wish" id="wish"></div>
 </div>
 
-<!-- Three.js -->
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.158.0/examples/js/loaders/GLTFLoader.js"></script>
+<canvas id="fireworks"></canvas>
 
 <script>
 /* ===== LỜI CHÚC ===== */
@@ -221,133 +158,53 @@ const wishes = [
   "Xuân mới chúc bạn cuộc sống nhẹ nhàng, lòng người an yên ☁️",
   "Năm mới chúc bạn vạn điều tốt đẹp cùng lúc gõ cửa 🧧"
 ];
-const p=new URLSearchParams(location.search);
-const from=p.get("from")||"một người bạn";
-const wish=wishes[Math.floor(Math.random()*wishes.length)];
-document.getElementById("wish").innerHTML=
-`🎁 <b>${from}</b> gửi bạn lời chúc:<br><br>${wish}`;
 
-/* ===== ĐẾM LƯỢT MỞ ===== */
-let k="tet_click";
-let c=+localStorage.getItem(k)||0;
-localStorage.setItem(k,++c);
-document.getElementById("count").innerText=c;
+const params = new URLSearchParams(location.search);
+const from = params.get("from") || "một người bạn";
+const wish = wishes[Math.floor(Math.random()*wishes.length)];
 
-/* ===== TOAST ===== */
-const t=document.createElement("div");
-t.className="toast";
-t.innerText="🔔 Tùng Phạm có lời chúc năm mới, nhấn vào ngay";
-document.body.appendChild(t);
-navigator.vibrate?.(80);
-
-/* ===== HOA MAI ===== */
-for(let i=0;i<12;i++){
-  let m=document.createElement("div");
-  m.className="mai";
-  m.innerText="🌼";
-  m.style.left=Math.random()*100+"vw";
-  m.style.fontSize=20+Math.random()*20+"px";
-  m.style.animationDuration=5+Math.random()*6+"s";
-  document.body.appendChild(m);
-}
+document.getElementById("from").innerText = from;
+document.getElementById("wish").innerHTML = wish;
 
 /* ===== PHÁO HOA ===== */
-const fw=document.getElementById("fireworks");
-const fctx=fw.getContext("2d");
-function rs(){fw.width=innerWidth;fw.height=innerHeight;}
-rs();addEventListener("resize",rs);
-let sparks=[];
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = innerWidth;
+  canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+let sparks = [];
+
 setInterval(()=>{
-  let x=Math.random()*fw.width;
-  let y=Math.random()*fw.height/2;
-  for(let i=0;i<40;i++)
-    sparks.push({x,y,dx:(Math.random()-.5)*4,dy:(Math.random()-.5)*4,l:60});
-},1200);
+  const x = Math.random()*canvas.width;
+  const y = Math.random()*canvas.height*0.4;
+  for(let i=0;i<30;i++){
+    sparks.push({
+      x,y,
+      dx:(Math.random()-.5)*4,
+      dy:(Math.random()-.5)*4,
+      life:50
+    });
+  }
+},1300);
+
 (function draw(){
-  fctx.clearRect(0,0,fw.width,fw.height);
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   sparks.forEach((s,i)=>{
-    s.x+=s.dx;s.y+=s.dy;s.l--;
-    fctx.fillStyle="rgba(255,215,0,.8)";
-    fctx.fillRect(s.x,s.y,3,3);
-    if(s.l<=0) sparks.splice(i,1);
+    s.x+=s.dx;
+    s.y+=s.dy;
+    s.life--;
+    ctx.fillStyle="rgba(255,215,0,.8)";
+    ctx.fillRect(s.x,s.y,3,3);
+    if(s.life<=0) sparks.splice(i,1);
   });
   requestAnimationFrame(draw);
 })();
-
-const paperCanvas = document.getElementById("wishCanvas");
-const pctx = paperCanvas.getContext("2d");
-
-function resizePaper(){
-  paperCanvas.width = innerWidth;
-  paperCanvas.height = innerHeight;
-  drawPaperText();
-}
-window.addEventListener("resize", resizePaper);
-
-/* CANH CHUẨN VỊ TRÍ TỜ GIẤY */
-function drawPaperText(){
-  pctx.clearRect(0,0,paperCanvas.width,paperCanvas.height);
-
-  const paperX = paperCanvas.width * 0.52;   // chỉnh trái/phải
-  const paperY = paperCanvas.height * 0.38;  // chỉnh lên/xuống
-  const maxWidth = paperCanvas.width * 0.38;
-
-  pctx.textAlign = "center";
-  pctx.fillStyle = "#7a2b00";
-  pctx.font = "bold 26px system-ui";
-
-  wrapTextCanvas(
-    pctx,
-    `🎁 ${from} chúc bạn:\n${wish}`,
-    paperX,
-    paperY,
-    maxWidth,
-    36
-  );
-}
-
-function wrapTextCanvas(ctx, text, x, y, maxWidth, lineHeight){
-  const lines = text.split("\n");
-  let offsetY = 0;
-
-  lines.forEach(line=>{
-    let words = line.split(" ");
-    let lineText = "";
-
-    words.forEach(word=>{
-      const test = lineText + word + " ";
-      if(ctx.measureText(test).width > maxWidth){
-        ctx.fillText(lineText, x, y + offsetY);
-        lineText = word + " ";
-        offsetY += lineHeight;
-      }else{
-        lineText = test;
-      }
-    });
-
-    ctx.fillText(lineText, x, y + offsetY);
-    offsetY += lineHeight;
-  });
-}
-resizePaper();
-/* RESIZE */
-window.addEventListener("resize", () => {
-  renderer.setSize(window.innerWidth, window.innerHeight * 0.4);
-  camera.aspect = window.innerWidth / (window.innerHeight * 0.4);
-  camera.updateProjectionMatrix();
-});
-
-/* ===== ACTION ===== */
-function reply(){location.href="https://m.me/";}
-function share(){
-  location.href="https://www.facebook.com/sharer/sharer.php?u="+
-  encodeURIComponent(location.href);
-}
 </script>
 
 </body>
 </html>
-
-
-
-
