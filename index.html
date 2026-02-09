@@ -18,11 +18,12 @@ html,body{
   margin:0;
   padding:0;
   height:100%;
-  font-family:system-ui;
+  font-family:system-ui,-apple-system;
   overflow:hidden;
+  background:#000;
 }
 
-/* Background ngựa */
+/* ===== BACKGROUND NGỰA ===== */
 .bg{
   position:fixed;
   inset:0;
@@ -30,41 +31,61 @@ html,body{
   z-index:1;
 }
 
-/* Khung lời chúc */
+/* ===== GOLD PANEL (KHUNG CHỮ) ===== */
 .scroll-text{
-  color:#fff5d1;
-  text-shadow:
-    0 2px 6px rgba(0,0,0,.6),
-    0 0 12px rgba(255,215,0,.4);
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+
+  width:62%;
+  max-width:420px;
+
+  padding:18px 20px;
+  border-radius:14px;
+
+  background:linear-gradient(
+    180deg,
+    rgba(255,220,140,.95),
+    rgba(255,193,7,.9)
+  );
+
+  border:2px solid rgba(255,255,255,.6);
+
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.45),
+    inset 0 0 18px rgba(255,255,255,.35);
+
+  text-align:center;
+  color:#7a1f00;
+  z-index:3;
 }
 
-
+/* ===== TEXT ===== */
 .scroll-text .from{
   font-size:13px;
-  opacity:.8;
+  font-weight:600;
   margin-bottom:8px;
+  opacity:.9;
 }
 
 .scroll-text .wish{
-  font-size:17px;
+  font-size:16px;
   line-height:1.6;
-  font-weight:600;
+  font-weight:700;
 }
 
-
-/* Mobile */
+/* ===== MOBILE ===== */
 @media(max-width:600px){
-   .scroll-text{
-    width:70%;
-    top:48%; /* đẩy lên đúng giữa giấy */
+  .scroll-text{
+    width:72%;
   }
-
   .scroll-text .wish{
     font-size:15px;
   }
 }
 
-/* Pháo hoa */
+/* ===== FIREWORKS ===== */
 #fireworks{
   position:fixed;
   inset:0;
@@ -80,7 +101,7 @@ html,body{
 
 <div class="scroll-text">
   <div class="from">
-    🎁 <b id="from">Tùng Phạm</b> gửi bạn lời chúc
+    🎁 <b id="from"></b> gửi bạn lời chúc
   </div>
   <div class="wish" id="wish"></div>
 </div>
@@ -162,9 +183,9 @@ const from = params.get("from") || "Tùng Phạm";
 const wish = wishes[Math.floor(Math.random()*wishes.length)];
 
 document.getElementById("from").innerText = from;
-document.getElementById("wish").innerHTML = wish;
+document.getElementById("wish").innerText = wish;
 
-/* ===== PHÁO HOA ===== */
+/* ===== FIREWORK EFFECT ===== */
 const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
@@ -192,20 +213,18 @@ setInterval(()=>{
 
 (function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
-  sparks.forEach((s,i)=>{
+  for(let i=sparks.length-1;i>=0;i--){
+    const s = sparks[i];
     s.x+=s.dx;
     s.y+=s.dy;
     s.life--;
-    ctx.fillStyle="rgba(255,215,0,.8)";
+    ctx.fillStyle="rgba(255,215,0,.85)";
     ctx.fillRect(s.x,s.y,3,3);
     if(s.life<=0) sparks.splice(i,1);
-  });
+  }
   requestAnimationFrame(draw);
 })();
 </script>
 
 </body>
 </html>
-
-
-
