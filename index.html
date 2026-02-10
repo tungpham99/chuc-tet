@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- Open Graph -->
-<meta property="og:title" content="🎉 Tùng Phạm đã gửi lời chúc năm mới tới bạn 🎉">
+<meta property="og:title" content="🎉 Mình đã gửi lời chúc năm mới tới bạn 🎉">
 <meta property="og:description" content="🧧 Nhấn ngay để nhận lời chúc năm mới 🎆">
 
 <meta property="og:type" content="website">
@@ -325,21 +325,12 @@ for(let i=0;i<18;i++){
 }
 
 /* ===== SHARE ===== */
-function isFacebookApp(){
-  return /FBAN|FBAV/i.test(navigator.userAgent);
-}
-
 function share(){
-  if(navigator.share && !isFacebookApp()){
-    navigator.share({
-      title: document.title,
-      text: "🎉 Mình vừa nhận được lời chúc năm mới!",
-      url: location.href
-    });
-  }else{
-    const url = encodeURIComponent(location.href);
-    location.href = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
-  }
+  const url = encodeURIComponent(location.href);
+  window.open(
+    `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+    "_blank"
+  );
 }
 
 function feedback(){
@@ -378,6 +369,7 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
 
 
