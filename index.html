@@ -343,7 +343,11 @@ function share(){
 }
 
 function feedback(){
-  location.href = "https://m.me/";
+  const fb = "devvoi6299"; // đổi thành username hoặc page id của bạn
+  window.location.href = `fb-messenger://user-thread/${fb}`;
+  setTimeout(() => {
+    window.location.href = `https://m.me/${fb}`;
+  }, 500);
 }
 
 /* ===== FIREWORK ===== */
@@ -374,6 +378,7 @@ setInterval(()=>{
 
 </body>
 </html>
+
 
 
 
