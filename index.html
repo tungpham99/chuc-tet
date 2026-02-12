@@ -7,13 +7,9 @@
 <!-- Open Graph -->
 <meta property="og:title" content="🎉 Mình đã gửi lời chúc năm mới tới bạn 🎉">
 <meta property="og:description" content="🧧 Nhấn ngay để nhận lời chúc năm mới 🎆">
-
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tungpham99.github.io/chuc-tet/">
-
 <meta property="og:image" content="https://tungpham99.github.io/chuc-tet/anhchuctet.png">
-<meta property="og:image:secure_url" content="https://tungpham99.github.io/chuc-tet/anhchuctet.png">
-<meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
@@ -29,110 +25,108 @@ html,body{
   font-family:system-ui,-apple-system;
 }
 
-/* ===== BACKGROUND ===== */
+/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
   background:url("horse.png") center/cover no-repeat;
   z-index:1;
+  pointer-events:none;
 }
 
-/* ===== CHỮ TRÊN CUỘN GIẤY ===== */
+/* TEXT */
 .scroll-text{
   position: fixed;
-  top: 47%;
+  top: 42%;
   left: 50%;
-  width: 52%;
-  max-width: 300px;
+  transform: translate(-50%, -55%) rotate(-7deg);
+  width: 85%;
+  max-width: 280px;
   aspect-ratio: 4 / 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 14px 16px;
-  box-sizing: border-box;
-  text-align: center;
-  color: #ffd700;
-  font-weight: 700;
-  line-height: 1.4;
-  z-index: 3;
-  pointer-events: none;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  padding:14px 16px;
+  text-align:center;
+  color:#ffd700;
+  font-weight:700;
+  line-height:2.3;
+  z-index:3;
+  pointer-events:none;
 }
-.scroll-text .from{font-size:14px;margin-bottom:6px}
-.scroll-text .wish{font-size:15px;font-weight:800}
 
-/* ===== FOOTER + HOA ===== */
+.scroll-text .from{
+  font-size:clamp(12px,3.2vw,14px);
+  margin-bottom:6px;
+}
+.scroll-text .wish{
+  font-size:clamp(13px,3.6vw,15px);
+  font-weight:800;
+}
+
+/* FOOTER */
 .footer-wrapper{
-  position: fixed;
-  bottom: 6px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 420px;
-  height: 100px;
-  z-index: 5;
-  pointer-events: none;
+  position:fixed;
+  bottom:6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100%;
+  max-width:420px;
+  height:100px;
+  z-index:5;
+  pointer-events:none;
 }
 
-/* LẮC NHẸ THEO GIÓ */
 @keyframes sway{
   0%{transform:rotate(-6deg)}
   50%{transform:rotate(6deg)}
   100%{transform:rotate(-6deg)}
 }
 
-/* Cành đào (trái) */
 .footer-wrapper::before{
   content:"🌸 🌸 🌸";
   position:absolute;
   left:-12px;
   bottom:26px;
-  font-size:28px;
+  font-size:26px;
   animation:sway 6s ease-in-out infinite;
   transform-origin:left bottom;
 }
-
-/* Cành mai (phải) */
 .footer-wrapper::after{
   content:"🌼 🌼 🌼";
   position:absolute;
   right:-12px;
   bottom:26px;
-  font-size:28px;
+  font-size:26px;
   animation:sway 7s ease-in-out infinite reverse;
   transform-origin:right bottom;
 }
 
-/* ===== BUTTON ===== */
+/* BUTTON */
 .footer-actions{
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    text-align: center;
-    height: 60px;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 16px;
-    z-index: 5;
+  position:fixed;
+  bottom:80px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  z-index:6;
+  pointer-events:auto;
 }
-
 .footer-actions button{
-    padding: 10px 16px;
-    border-radius: 999px;
-    border: none;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    background: linear-gradient(135deg,#ffd700,#ffb700);
-    color: #7a2e00;
-    box-shadow: 0 6px 14px rgba(0,0,0,.35);
+  padding:10px 16px;
+  border-radius:999px;
+  border:none;
+  font-size:12px;
+  font-weight:600;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ffd700,#ffb700);
+  color:#7a2e00;
+  box-shadow:0 6px 14px rgba(0,0,0,.35);
 }
+.footer-actions button:active{transform:scale(.95)}
 
-.footer-actions button:active{
-  transform: scale(0.95);
-}
-
-/* ===== HOA RỤNG ===== */
+/* PETALS */
 .petals{
   position:fixed;
   inset:0;
@@ -146,67 +140,12 @@ html,body{
   opacity:.9;
 }
 @keyframes fall{
-  0%{transform:translateY(-20px) rotate(0deg);opacity:0}
+  0%{transform:translateY(-20px);opacity:0}
   10%{opacity:1}
   100%{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 
-/* ===== MOBILE RESPONSIVE – PHÙ HỢP MỌI ĐIỆN THOẠI ===== */
-
-/* Điện thoại rất nhỏ (iPhone SE, Android nhỏ) */
-@media (max-width:360px){
-  .scroll-text{
-    top: 38%;
-    width: 92%;
-    max-width: 250px;
-    line-height: 2.2;
-    transform: translate(-50%, -55%) rotate(-7deg);
-  }
-  .scroll-text .from{font-size:12px}
-  .scroll-text .wish{font-size:13px}
-}
-
-/* Điện thoại phổ biến (iPhone, Samsung, Xiaomi…) */
-@media (max-width:430px){
-  .scroll-text{
-    top: 40%;
-    width: 85%;
-    max-width: 270px;
-    line-height: 2.4;
-    transform: translate(-50%, -55%) rotate(-7deg);
-  }
-  .scroll-text .from{font-size:13px}
-  .scroll-text .wish{font-size:14px}
-}
-
-/* Điện thoại lớn & phablet */
-@media (max-width:600px){
-  .scroll-text{
-    top: 42%;
-    width: 60%;
-    max-width: 300px;
-    line-height: 2.3;
-    transform: translate(-39%, -54%) rotate(-7deg);
-  }
-
-  .footer-wrapper::before,
-  .footer-wrapper::after{
-    font-size:24px;
-  }
-}
-
-/* ===== FONT SCALE TỰ ĐỘNG (AN TOÀN MỌI MÀN) ===== */
-.scroll-text .from{
-  font-size: clamp(12px, 3.2vw, 14px);
-}
-
-.scroll-text .wish{
-  font-size: clamp(13px, 3.6vw, 15px);
-}
-.bg{ pointer-events: none; }
-.footer-wrapper{ pointer-events: none; }
-.footer-actions{ pointer-events: auto; }
-/* ===== FIREWORK ===== */
+/* FIREWORK */
 #fireworks{
   position:fixed;
   inset:0;
@@ -225,10 +164,8 @@ html,body{
   <div class="wish" id="wish"></div>
 </div>
 
-<!-- HOA RỤNG -->
 <div class="petals" id="petals"></div>
 
-<!-- FOOTER -->
 <div class="footer-wrapper">
   <div class="footer-actions">
     <button onclick="feedback()">💬 Trả lời</button>
@@ -238,57 +175,24 @@ html,body{
 <canvas id="fireworks"></canvas>
 
 <script>
-/* ===== LỜI CHÚC ===== */
+/* WISHES */
 const wishes = [
   "Chúc năm mới an khang thịnh vượng, vạn sự như ý 🌸",
   "Năm mới chúc sức khỏe dồi dào, gia đình hạnh phúc ❤️",
   "Chúc một năm mới bình an, may mắn và nhiều niềm vui 🎉",
-  "Năm mới đến, chúc mọi điều tốt đẹp luôn đồng hành ✨",
-  "Chúc năm mới làm ăn phát đạt, cuộc sống đủ đầy 💰",
-  "Mong năm mới mang đến thật nhiều sức khỏe và hạnh phúc 😊",
-  "Chúc một năm mới khởi đầu suôn sẻ, kết thúc viên mãn 🌼",
-  "Năm mới chúc gia đình luôn ấm êm, yêu thương trọn vẹn 🏡",
-  "Chúc mọi người năm mới gặp nhiều may mắn và thành công 🍀",
-  "Năm mới đến, chúc niềm vui luôn ngập tràn mỗi ngày 😄",
-
   "Chúc năm mới tiền vào như nước, sức khỏe như núi 💸",
-  "Mong năm mới xóa tan muộn phiền, đón nhận điều tốt đẹp 🌈",
-  "Chúc một năm mới an yên, vui vẻ và hạnh phúc 💖",
-  "Năm mới chúc công việc thuận lợi, cuộc sống suôn sẻ 🚀",
-  "Chúc năm mới gia đình sum vầy, tràn ngập tiếng cười 🎊",
-  "Mong năm mới mang đến nhiều cơ hội và thành công mới 🌟",
-  "Chúc năm mới lúc nào cũng mạnh khỏe và vui vẻ 😁",
-  "Năm mới đến, chúc mọi dự định đều thành công 🎯",
-  "Chúc một năm mới nhẹ nhàng, bình an và đủ đầy 🌿",
-  "Năm mới chúc mọi người vạn sự cát tường 🧧",
-
-  "Chúc năm mới hạnh phúc đủ đầy, niềm vui viên mãn 💐",
-  "Mong năm mới cuộc sống luôn êm đềm và suôn sẻ 🌊",
-  "Chúc năm mới luôn giữ được tinh thần lạc quan ☀️",
-  "Năm mới đến, chúc mọi người luôn gặp điều tốt lành 🍃",
-  "Chúc một năm mới thành công hơn năm cũ 🏆",
-  "Năm mới chúc sức khỏe là vàng, bình an là quý 💎",
-  "Chúc năm mới mọi việc thuận buồm xuôi gió ⛵",
-  "Mong năm mới mang đến nhiều tiếng cười và niềm vui 😆",
-  "Năm mới đến, chúc cuộc sống ngày càng tốt đẹp 🌺",
-
-  "Chúc năm mới an nhiên, tự tại và vui vẻ mỗi ngày 🌸",
-  "Mong năm mới mang đến nhiều điều may mắn bất ngờ 🎁",
-  "Chúc năm mới tâm an, trí sáng, lòng vui 💫",
-  "Năm mới chúc mọi điều không như ý đều qua đi 🍂",
-  "Chúc một năm mới đầy ắp yêu thương và hạnh phúc ❤️",
-  "Năm mới đến, chúc thành công nối tiếp thành công 🚀",
-  "Chúc năm mới gia đình bình an, sức khỏe dồi dào 🌿",
-  "Mong năm mới cuộc sống luôn tràn đầy năng lượng tích cực ⚡",
-  "Chúc năm mới làm gì cũng thuận lợi và suôn sẻ 👍",
   "Năm mới đến, chúc hạnh phúc luôn ở bên bạn 🌼"
 ];
-const params=new URLSearchParams(location.search);
-document.getElementById("from").innerText=params.get("from")||"Tùng Phạm";
-document.getElementById("wish").innerText=wishes[Math.floor(Math.random()*wishes.length)];
 
-/* ===== HOA RỤNG KHI LOAD ===== */
-const petals=document.getElementById("petals");
+const params = new URLSearchParams(location.search);
+document.getElementById("from").innerText =
+  params.get("from") || "Tùng Phạm";
+
+document.getElementById("wish").innerText =
+  wishes[Math.floor(Math.random()*wishes.length)];
+
+/* PETALS */
+const petals = document.getElementById("petals");
 for(let i=0;i<18;i++){
   const p=document.createElement("div");
   p.className="petal";
@@ -299,35 +203,43 @@ for(let i=0;i<18;i++){
   petals.appendChild(p);
 }
 
+/* FEEDBACK – FIX CHUẨN */
 function feedback(){
-  const fb = "devvoi6299"; // đổi thành username hoặc page id của bạn
-  window.location.href = `fb-messenger://user-thread/${fb}`;
-  setTimeout(() => {
-    window.location.href = `https://m.me/${fb}`;
-  }, 500);
+  const fb = "devvoi6299";
+  window.location.href = "fb-messenger://user-thread/" + fb;
+  setTimeout(()=>{
+    window.location.href = "https://m.me/" + fb;
+  },500);
 }
 
-/* ===== FIREWORK ===== */
+/* FIREWORK */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
 resize();addEventListener("resize",resize);
+
 let sparks=[];
 setInterval(()=>{
   const x=Math.random()*canvas.width;
-  const y=Math.random()*canvas.height*.4;
+  const y=Math.random()*canvas.height*0.4;
   for(let i=0;i<26;i++){
-    sparks.push({x,y,dx:(Math.random()-.5)*4,dy:(Math.random()-.5)*4,life:45});
+    sparks.push({
+      x,y,
+      dx:(Math.random()-.5)*4,
+      dy:(Math.random()-.5)*4,
+      life:45
+    });
   }
 },1300);
+
 (function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let i=sparks.length-1;i>=0;i--){
     const s=sparks[i];
-    s.x+=s.dx;s.y+=s.dy;s.life--;
+    s.x+=s.dx; s.y+=s.dy; s.life--;
     ctx.fillStyle="rgba(255,215,0,.85)";
     ctx.fillRect(s.x,s.y,3,3);
-    if(s.life<=0)sparks.splice(i,1);
+    if(s.life<=0) sparks.splice(i,1);
   }
   requestAnimationFrame(draw);
 })();
@@ -335,17 +247,3 @@ setInterval(()=>{
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
