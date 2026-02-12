@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Open Graph -->
 <meta property="og:title" content="🎉 Mình đã gửi lời chúc năm mới tới bạn 🎉">
 <meta property="og:description" content="🧧 Nhấn ngay để nhận lời chúc năm mới 🎆">
 <meta property="og:type" content="website">
@@ -25,7 +24,6 @@ html,body{
   font-family:system-ui,-apple-system;
 }
 
-/* BACKGROUND */
 .bg{
   position:fixed;
   inset:0;
@@ -34,7 +32,6 @@ html,body{
   pointer-events:none;
 }
 
-/* TEXT */
 .scroll-text{
   position: fixed;
   top: 42%;
@@ -65,7 +62,6 @@ html,body{
   font-weight:800;
 }
 
-/* FOOTER */
 .footer-wrapper{
   position:fixed;
   bottom:6px;
@@ -103,7 +99,6 @@ html,body{
   transform-origin:right bottom;
 }
 
-/* BUTTON */
 .footer-actions{
   position:fixed;
   bottom:80px;
@@ -145,7 +140,6 @@ html,body{
   100%{transform:translateY(110vh) rotate(360deg);opacity:0}
 }
 
-/* FIREWORK */
 #fireworks{
   position:fixed;
   inset:0;
@@ -175,14 +169,7 @@ html,body{
 <canvas id="fireworks"></canvas>
 
 <script>
-/* WISHES */
-const wishes = [
-  "Chúc năm mới an khang thịnh vượng, vạn sự như ý 🌸",
-  "Năm mới chúc sức khỏe dồi dào, gia đình hạnh phúc ❤️",
-  "Chúc một năm mới bình an, may mắn và nhiều niềm vui 🎉",
-  "Chúc năm mới tiền vào như nước, sức khỏe như núi 💸",
-  "Năm mới đến, chúc hạnh phúc luôn ở bên bạn 🌼"
-];
+const wishes = [ "Chúc năm mới an khang thịnh vượng, vạn sự như ý 🌸", "Năm mới chúc sức khỏe dồi dào, gia đình hạnh phúc ❤️", "Chúc một năm mới bình an, may mắn và nhiều niềm vui 🎉", "Năm mới đến, chúc mọi điều tốt đẹp luôn đồng hành ✨", "Chúc năm mới làm ăn phát đạt, cuộc sống đủ đầy 💰", "Mong năm mới mang đến thật nhiều sức khỏe và hạnh phúc 😊", "Chúc một năm mới khởi đầu suôn sẻ, kết thúc viên mãn 🌼", "Năm mới chúc gia đình luôn ấm êm, yêu thương trọn vẹn 🏡", "Chúc mọi người năm mới gặp nhiều may mắn và thành công 🍀", "Năm mới đến, chúc niềm vui luôn ngập tràn mỗi ngày 😄", "Chúc năm mới tiền vào như nước, sức khỏe như núi 💸", "Mong năm mới xóa tan muộn phiền, đón nhận điều tốt đẹp 🌈", "Chúc một năm mới an yên, vui vẻ và hạnh phúc 💖", "Năm mới chúc công việc thuận lợi, cuộc sống suôn sẻ 🚀", "Chúc năm mới gia đình sum vầy, tràn ngập tiếng cười 🎊", "Mong năm mới mang đến nhiều cơ hội và thành công mới 🌟", "Chúc năm mới lúc nào cũng mạnh khỏe và vui vẻ 😁", "Năm mới đến, chúc mọi dự định đều thành công 🎯", "Chúc một năm mới nhẹ nhàng, bình an và đủ đầy 🌿", "Năm mới chúc mọi người vạn sự cát tường 🧧", "Chúc năm mới hạnh phúc đủ đầy, niềm vui viên mãn 💐", "Mong năm mới cuộc sống luôn êm đềm và suôn sẻ 🌊", "Chúc năm mới luôn giữ được tinh thần lạc quan ☀️", "Năm mới đến, chúc mọi người luôn gặp điều tốt lành 🍃", "Chúc một năm mới thành công hơn năm cũ 🏆", "Năm mới chúc sức khỏe là vàng, bình an là quý 💎", "Chúc năm mới mọi việc thuận buồm xuôi gió ⛵", "Mong năm mới mang đến nhiều tiếng cười và niềm vui 😆", "Năm mới đến, chúc cuộc sống ngày càng tốt đẹp 🌺", "Chúc năm mới an nhiên, tự tại và vui vẻ mỗi ngày 🌸", "Mong năm mới mang đến nhiều điều may mắn bất ngờ 🎁", "Chúc năm mới tâm an, trí sáng, lòng vui 💫", "Năm mới chúc mọi điều không như ý đều qua đi 🍂", "Chúc một năm mới đầy ắp yêu thương và hạnh phúc ❤️", "Năm mới đến, chúc thành công nối tiếp thành công 🚀", "Chúc năm mới gia đình bình an, sức khỏe dồi dào 🌿", "Mong năm mới cuộc sống luôn tràn đầy năng lượng tích cực ⚡", "Chúc năm mới làm gì cũng thuận lợi và suôn sẻ 👍", "Năm mới đến, chúc hạnh phúc luôn ở bên bạn 🌼" ];
 
 const params = new URLSearchParams(location.search);
 document.getElementById("from").innerText =
@@ -191,7 +178,6 @@ document.getElementById("from").innerText =
 document.getElementById("wish").innerText =
   wishes[Math.floor(Math.random()*wishes.length)];
 
-/* PETALS */
 const petals = document.getElementById("petals");
 for(let i=0;i<18;i++){
   const p=document.createElement("div");
@@ -203,7 +189,6 @@ for(let i=0;i<18;i++){
   petals.appendChild(p);
 }
 
-/* FEEDBACK – FIX CHUẨN */
 function feedback(){
   const fb = "devvoi6299";
   window.location.href = "fb-messenger://user-thread/" + fb;
@@ -212,7 +197,6 @@ function feedback(){
   },500);
 }
 
-/* FIREWORK */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
@@ -247,3 +231,4 @@ setInterval(()=>{
 
 </body>
 </html>
+
